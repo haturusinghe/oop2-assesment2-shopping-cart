@@ -21,7 +21,7 @@ public class SaleItemController {
         this.saleItemService = saleItemService;
     }
 
-    @GetMapping(path = "list")
+    @GetMapping(path = "all")
     public ResponseEntity<List<SaleItem>> getSaleItemList(){
         return new ResponseEntity<>(saleItemService.getSaleItems(), HttpStatus.OK);
     }

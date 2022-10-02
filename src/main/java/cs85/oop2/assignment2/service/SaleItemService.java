@@ -19,4 +19,5 @@ public class SaleItemService {
     public List<SaleItem> getSaleItems() {
         return saleItemRepository.findAll();
     }
+
 }
