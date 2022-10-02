@@ -23,4 +23,8 @@ public class CartItemService {
     public float getTotalCartPrice(){
         return cartItemRepository.getTotalPrice();
     }
+
+    public int getTotalItems() {
+        return cartItemRepository.getItemCount();
+    }
 }

@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface CartItemRepository extends JpaRepository<CartItem,Long> {
     @Query("SELECT SUM(c.price) FROM CartItem c")
     float getTotalPrice();
+
+    @Query("SELECT COUNT(c.price) FROM CartItem c")
+    int getItemCount();
 }
