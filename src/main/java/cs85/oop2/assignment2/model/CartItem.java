@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 public class CartItem {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -15,7 +16,6 @@ public class CartItem {
     private int cartons;
     private int singleItems;
 
-    @Transient
     private float price;
 
     public CartItem() {
@@ -25,6 +25,17 @@ public class CartItem {
         this.item = item;
         this.cartons = cartons;
         this.singleItems = singleItems;
+
+        double sum = 0;
+        int unitsInCarton = this.item.getUnitsInCarton();
+        double cartonPrice = this.item.getCartonPrice();
+
+        if(singleItems > unitsInCarton){
+            this.cartons += this.singleItems / unitsInCarton;
+            this.singleItems = this.singleItems % unitsInCarton;
+        }
+
+        this.price = (float) calculatePrice(cartonPrice);
     }
 
     public Long getId() {
@@ -59,22 +70,6 @@ public class CartItem {
         this.singleItems = singleItems;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        double sum = 0;
-        int unitsInCarton = this.item.getUnitsInCarton();
-        double cartonPrice = this.item.getCartonPrice();
-
-        if(singleItems > unitsInCarton){
-            this.cartons += this.singleItems / unitsInCarton;
-            this.singleItems = this.singleItems % unitsInCarton;
-        }
-
-        this.price = (float) calculatePrice(cartonPrice);
-    }
 
     private double calculatePrice(double cartonPrice) {
         double cartonTotalPrice;
@@ -85,5 +80,13 @@ public class CartItem {
         }
         double singlesTotalPrice = this.singleItems * cartonPrice * 1.3;
         return (singlesTotalPrice + cartonTotalPrice);
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }
