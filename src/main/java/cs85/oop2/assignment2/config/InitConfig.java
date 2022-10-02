@@ -1,6 +1,8 @@
 package cs85.oop2.assignment2.config;
 
+import cs85.oop2.assignment2.model.CartItem;
 import cs85.oop2.assignment2.model.SaleItem;
+import cs85.oop2.assignment2.repository.CartItemRepository;
 import cs85.oop2.assignment2.repository.SaleItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -19,16 +21,24 @@ import java.util.List;
 * */
 
 @Configuration
-public class SaleItemConfig {
+public class InitConfig {
     @Bean
     CommandLineRunner commandLineRunner(SaleItemRepository repository){
         return args -> {
             repository.saveAll(
                     List.of(
                             new SaleItem("i001","Penguin-ears",20,175D,true),
-                            new SaleItem("i002","Horseshoe",5,825D,true)
+                            new SaleItem("i002","Horseshoe",5,825D,false)
                     )
             );
+        };
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner2(CartItemRepository cartRepository,SaleItemRepository saleRepo){
+        return args -> {
+            cartRepository.save(new CartItem(saleRepo.findOneByItemNumber("i001").get(),5,24));
+            cartRepository.save(new CartItem(saleRepo.findOneByItemNumber("i002").get(),2,12));
         };
     }
 }
