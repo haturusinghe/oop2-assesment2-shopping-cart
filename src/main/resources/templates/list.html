@@ -46,7 +46,7 @@
                 <span class="text-center w-1/5 font-semibold text-sm" th:text = "${item.rare}">Rare ?</span>
 
                 <a class="text-center w-1/5 font-semibold text-sm text-blue-600 dark:text-green-500 hover:underline" th:href = "@{/item/{id}(id=${item.id})}" >Edit</a>
-                <a class="text-center w-1/5 font-semibold text-sm text-red-600 dark:text-blue-500 hover:underline" >Add</a>
+                <a class="text-center w-1/5 font-semibold text-sm text-red-600 dark:text-blue-500 hover:underline" th:href = "@{/cart/add/{id}(id=${item.id})}" >Add To Cart</a>
                 <a class="text-center w-1/5 font-semibold text-sm text-red-600 dark:text-red-500 hover:underline" th:href = "@{/item/delete/{id}(id=${item.id})}" >Delete</a>
                 <!--<a class="font-medium text-blue-600 dark:text-green-500 hover:underline" th:href = "@{/item/{id}(id=${item.id})}">Edit</a>
                 <a class="font-medium text-red-600 dark:text-blue-500 hover:underline">Add to Cart</a>
