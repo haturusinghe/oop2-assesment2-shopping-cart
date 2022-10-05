@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Item to Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="h-screen flex flex-col items-center justify-center">
+    <h5 class="font-medium leading-tight text-4xl mt-0 mb-2 text-black-600">Add to Cart:</h5>
+    <h3 class="font-medium leading-tight text-4xl mt-0 mb-2 text-black-600" th:text="${itemToAdd.item.itemName}">Item Name</h3>
+    <br>
+    <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+        <form th:action="@{/cart/add/{id} (id=${itemToAdd.item.id})}" th:object="${itemToAdd}" method="POST">
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Number of Cartons </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" name="cartons" th:field="*{cartons}"  />
+            </div>
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Number of Single Items </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"  type="text" name="singleItems" th:field="*{singleItems}"  />
+            </div>
+            <div class="flex space-x-2 justify-center">
+                <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                        type="submit"> Add </button>
+                <a class="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                   th:href = "@{/}"> Cancel </a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
