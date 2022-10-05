@@ -23,17 +23,25 @@ public class SaleItem {
 
     private double cartonPrice = 0;
 
-    private boolean isRare = false;
+    private boolean rare;
 
     public SaleItem() {
     }
 
-    public SaleItem(String itemNumber, String itemName, int unitsInCarton, double cartonPrice, boolean isRare) {
+    public SaleItem(String itemNumber, String itemName, int unitsInCarton, double cartonPrice, boolean rare) {
         this.itemNumber = itemNumber;
         this.itemName = itemName;
         this.unitsInCarton = unitsInCarton;
         this.cartonPrice = cartonPrice;
-        this.isRare = isRare;
+        this.rare = rare;
+    }
+
+    public boolean isRare() {
+        return rare;
+    }
+
+    public void setRare(boolean rare) {
+        this.rare = rare;
     }
 
     public Long getId() {
@@ -76,11 +84,5 @@ public class SaleItem {
         this.cartonPrice = cartonPrice;
     }
 
-    public boolean isRare() {
-        return isRare;
-    }
 
-    public void setRare(boolean rare) {
-        isRare = rare;
-    }
 }
