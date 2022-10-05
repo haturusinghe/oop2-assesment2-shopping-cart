@@ -27,4 +27,8 @@ public class CartItemService {
     public int getTotalItems() {
         return cartItemRepository.getItemCount();
     }
+
+    public void addItemToCart(CartItem cartItem) {
+        cartItemRepository.save(cartItem);
+    }
 }
