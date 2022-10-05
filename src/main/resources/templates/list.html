@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse All Items</title>
+    <link th:href="@{/styles/output.css}" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-gray-100">
+<div class="container mx-auto mt-10">
+    <div class="flex shadow-md my-10">
+        <div class="w-3/4 bg-white px-10 py-10">
+            <div class="flex justify-between border-b pb-8">
+                <h1 class="font-semibold text-2xl">Browse Items</h1>
+                <h2 class="font-semibold text-2xl"> </h2>
+            </div>
+            <div class="flex mt-10 mb-5">
+                <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Item Name</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Units in Carton</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Carton Price</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Item Status</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Edit</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Add to Cart</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Delete</h3>
+            </div>
+            <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5" th:each = "item: ${items}">
+                <div class="flex w-2/5"> <!-- product -->
+                    <div class="flex flex-col justify-between ml-4 flex-grow">
+                        <span class="font-bold text-sm" th:text = "${item.itemName}"></span>
+                    </div>
+                </div>
+                <div class="flex justify-center w-1/5">
+                    <span class="text-center w-1/5 font-semibold text-sm" th:text = "${item.unitsInCarton}">Units In Carton</span>
+                </div>
+                <span class="text-center w-1/5 font-semibold text-sm" th:text = "${item.cartonPrice}">Carton Price</span>
+                <span class="text-center w-1/5 font-semibold text-sm" th:text = "${item.rare}">Rare ?</span>
+
+                <a class="text-center w-1/5 font-semibold text-sm text-blue-600 dark:text-green-500 hover:underline" th:href = "@{/item/{id}(id=${item.id})}" >Edit</a>
+                <a class="text-center w-1/5 font-semibold text-sm text-red-600 dark:text-blue-500 hover:underline" >Add</a>
+                <a class="text-center w-1/5 font-semibold text-sm text-red-600 dark:text-red-500 hover:underline" th:href = "@{/item/delete/{id}(id=${item.id})}" >Delete</a>
+                <!--<a class="font-medium text-blue-600 dark:text-green-500 hover:underline" th:href = "@{/item/{id}(id=${item.id})}">Edit</a>
+                <a class="font-medium text-red-600 dark:text-blue-500 hover:underline">Add to Cart</a>
+                <a class="font-medium text-red-600 dark:text-red-500 hover:underline" th:href = "@{/item/delete/{id}(id=${item.id})}" methods="DELETE">Delete</a>-->
+            </div>
+
+
+
+            <a th:href = "@{/add}" class="flex font-semibold text-indigo-600 text-sm mt-10">
+                Add New item
+            </a>
+        </div>
+
+        <div id="summary" class="w-1/4 px-8 py-10">
+            <h1 class="font-semibold text-2xl border-b pb-8"></h1>
+            <div class="flex justify-between mt-10 mb-5">
+                <a
+                        class="inline-block px-6 py-2.5 w-full bg-[#292524] text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-[#57534e] hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                        th:href = "@{/add}"
+                > Add New Item</a>
+            </div>
+
+            <div class="border-t mt-8">
+                <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+                    <a
+                            class="inline-block w-full px-6 py-2.5 bg-[#292524] text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-[#57534e] hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                            th:href = "@{/cart}"
+                    > View Cart </a>
+                </div>
+                <!--                <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>-->
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

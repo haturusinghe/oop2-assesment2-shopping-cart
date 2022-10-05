@@ -1,10 +1,45 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Sale Item</title>
+    <title>Edit Item</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+<div class="h-screen flex flex-col items-center justify-center">
+    <h2 class="font-medium leading-tight text-4xl mt-0 mb-2 text-blue-600">Edit Item</h2>
+    <br>
+    <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+        <form th:action="@{/item/{id} (id=${saleItem.id})}" th:object="${saleItem}" method="POST">
 
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Item Number </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" name="itemNumber" th:field="*{itemNumber}" placeholder="Enter Item Number" />
+            </div>
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Item Name </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"  type="text" name="itemName" th:field="*{itemName}" placeholder="Enter Item Name" />
+            </div>
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Units in Carton </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" name="unitsInCarton" th:field="*{unitsInCarton}" placeholder="Enter # Units" />
+            </div>
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Carton Price </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                       type="text" name="cartonPrice" th:field="*{cartonPrice}" placeholder="Enter Carton Price" />
+            </div>
+            <div class="form-group mb-6">
+                <label class="form-label inline-block mb-2 text-gray-700"> Rare Item ? </label>
+                <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="checkbox" name="rare"
+                       th:field="${saleItem.rare}"  />
+            </div>
+            <div class="flex space-x-2 justify-center">
+                <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" type="submit"> Update and Save </button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
