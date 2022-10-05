@@ -19,7 +19,7 @@ public class SalesItemViewController {
     @GetMapping
     public String itemList(Model model){
         model.addAttribute("items",saleItemService.getSaleItems());
-        return "item_list";
+        return "list";
     }
 
     @GetMapping("/add")

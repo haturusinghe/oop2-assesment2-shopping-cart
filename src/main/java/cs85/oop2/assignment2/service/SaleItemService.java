@@ -22,6 +22,7 @@ public class SaleItemService {
     }
 
     public void addNewSaleItem(SaleItem saleItem) {
+        saleItemRepository.save(saleItem);
     }
 
     public Optional<SaleItem> getSaleItem(Long id) {
