@@ -22,11 +22,20 @@ public class CartItemService {
     }
 
     public float getTotalCartPrice(){
-        return cartItemRepository.getTotalPrice();
+        if(cartItemRepository.findAll().size() > 0){
+            return cartItemRepository.getTotalPrice();
+        }else{
+            return 0;
+        }
+
     }
 
     public int getTotalItems() {
-        return cartItemRepository.getItemCount();
+        if(cartItemRepository.findAll().size() > 0){
+            return cartItemRepository.getItemCount();
+        }else{
+            return 0;
+        }
     }
 
     public void addItemToCart(CartItem cartItem) {
