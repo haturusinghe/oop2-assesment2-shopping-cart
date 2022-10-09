@@ -1,4 +1,4 @@
-* Last Update : 09/10/2022:  ``` Bug Fixes, Added Remove and Edit functions to Cart Page```
+* Last Update : 09/10/2022 :  ``` Bug Fixes, Added Remove and Edit functions to Cart Page```
 
  
   ![My Image](screenshots/s9.jpg)
