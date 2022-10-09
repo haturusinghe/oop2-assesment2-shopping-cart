@@ -9,7 +9,7 @@ public class CartItem {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "item_id")
     private SaleItem item;
 
@@ -30,12 +30,24 @@ public class CartItem {
         int unitsInCarton = this.item.getUnitsInCarton();
         double cartonPrice = this.item.getCartonPrice();
 
-        if(singleItems > unitsInCarton){
+        if(singleItems >= unitsInCarton){
             this.cartons += this.singleItems / unitsInCarton;
             this.singleItems = this.singleItems % unitsInCarton;
         }
 
         this.price = (float) calculatePrice(cartonPrice);
+    }
+
+    private void adjustCartonsAndSingles() {
+        double sum = 0;
+        int unitsInCarton = this.item.getUnitsInCarton();
+        double cartonPrice = this.item.getCartonPrice();
+
+        if(singleItems >= unitsInCarton){
+            this.cartons += this.singleItems / unitsInCarton;
+            this.singleItems = this.singleItems % unitsInCarton;
+        }
+        setPrice((float) calculatePrice(cartonPrice));
     }
 
     public Long getId() {
@@ -60,6 +72,7 @@ public class CartItem {
 
     public void setCartons(int cartons) {
         this.cartons = cartons;
+        adjustCartonsAndSingles();
     }
 
     public int getSingleItems() {
@@ -68,6 +81,7 @@ public class CartItem {
 
     public void setSingleItems(int singleItems) {
         this.singleItems = singleItems;
+        adjustCartonsAndSingles();
     }
 
 

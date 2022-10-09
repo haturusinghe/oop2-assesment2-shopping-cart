@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartItemService {
@@ -30,5 +31,9 @@ public class CartItemService {
 
     public void addItemToCart(CartItem cartItem) {
         cartItemRepository.save(cartItem);
+    }
+
+    public Optional<CartItem> getCartItem(Long id) {
+        return cartItemRepository.findById(id);
     }
 }

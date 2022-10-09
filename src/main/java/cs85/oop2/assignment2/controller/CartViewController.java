@@ -1,6 +1,8 @@
 package cs85.oop2.assignment2.controller;
 
 import cs85.oop2.assignment2.model.CartItem;
+import cs85.oop2.assignment2.dto.CartMeta;
+import cs85.oop2.assignment2.dto.EditCartMeta;
 import cs85.oop2.assignment2.model.SaleItem;
 import cs85.oop2.assignment2.service.CartItemService;
 import cs85.oop2.assignment2.service.SaleItemService;
@@ -33,43 +35,38 @@ public class CartViewController {
 
     @GetMapping("/add/{id}")
     public String addItemToCart(Model model,@PathVariable Long id){
-        CartItem itemToAdd = new CartItem();
-        itemToAdd.setItem(saleItemService.getSaleItem(id).get());
+        EditCartMeta itemToAdd = new EditCartMeta(id,saleItemService.getSaleItem(id).get().getItemName(), 0, 0);
         model.addAttribute("itemToAdd", itemToAdd);
         return "add_cart";
     }
 
     @PostMapping("/add/{id}")
-    public String addItemToCart(@ModelAttribute("itemToAdd") CartItem cartItem , Model model, @PathVariable Long id){
+    public String addItemToCart(@ModelAttribute("itemToAdd") EditCartMeta cartItem , Model model, @PathVariable Long id){
+
         SaleItem saleItem = saleItemService.getSaleItem(id).get();
-        CartItem itemToAdd = new CartItem(saleItem,cartItem.getCartons(),cartItem.getSingleItems());
-        cartItemService.addItemToCart(itemToAdd);
+        CartItem newCartItem = new CartItem(saleItem, cartItem.getCartons(), cartItem.getSingleItems());
+        cartItemService.addItemToCart(newCartItem);
+
         return "redirect:/cart";
     }
 
-    private class CartMeta {
-        float totalCartPrice;
-        int totalItems;
-
-        public CartMeta(float totalCartPrice, int totalItems) {
-            this.totalCartPrice = totalCartPrice;
-            this.totalItems = totalItems;
-        }
-
-        public float getTotalCartPrice() {
-            return totalCartPrice;
-        }
-
-        public void setTotalCartPrice(float totalCartPrice) {
-            this.totalCartPrice = totalCartPrice;
-        }
-
-        public int getTotalItems() {
-            return totalItems;
-        }
-
-        public void setTotalItems(int totalItems) {
-            this.totalItems = totalItems;
-        }
+    @GetMapping("/edit/{id}")
+    public String editItemToCart(Model model,@PathVariable Long id){
+        CartItem current = cartItemService.getCartItem(id).get();
+        EditCartMeta itemToEdit = new EditCartMeta(current.getId(),current.getItem().getItemName(), current.getCartons(), current.getSingleItems());
+        model.addAttribute("itemToEdit", itemToEdit);
+        return "edit_cart";
     }
+
+    @PostMapping("/edit/{id}")
+    public String editItemToCart(@ModelAttribute("itemToEdit") EditCartMeta cartItem , Model model, @PathVariable Long id){
+        CartItem itemToEdit = cartItemService.getCartItem(id).get();
+        itemToEdit.setCartons(cartItem.getCartons());
+        itemToEdit.setSingleItems(cartItem.getSingleItems());
+        cartItemService.addItemToCart(itemToEdit);
+        return "redirect:/cart";
+    }
+
+
+
 }
