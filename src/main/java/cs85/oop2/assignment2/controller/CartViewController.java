@@ -67,6 +67,12 @@ public class CartViewController {
         return "redirect:/cart";
     }
 
+    @GetMapping("/remove/{id}")
+    public String deleteItemFromCart(Model model,@PathVariable Long id){
+        cartItemService.deleteCartItem(id);
+        return "redirect:/cart";
+    }
+
 
 
 }
