@@ -28,6 +28,7 @@
                 <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
                 <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Cartons</h3>
                 <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Singles</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Edit</h3>
                 <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
             </div>
             <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5" th:each = "citem: ${citems}">
@@ -40,6 +41,7 @@
                     <span class="text-center w-1/5 font-semibold text-sm" th:text = "${citem.cartons}">Cartons</span>
                 </div>
                 <span class="text-center w-1/5 font-semibold text-sm" th:text = "${citem.singleItems}">Singles</span>
+                <a class="text-center w-1/5 font-semibold text-sm text-red-600 dark:text-red-500 hover:underline" th:href = "@{/cart/edit/{id}(id=${citem.id})}">Edit</a>
                 <span class="text-center w-1/5 font-semibold text-sm" th:text = "${citem.price}">Total</span>
             </div>
 
